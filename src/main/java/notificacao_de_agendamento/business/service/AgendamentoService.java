@@ -19,4 +19,9 @@ public class AgendamentoService {
                 repository.save(mapper.paraEntity(requestDto)));
     }
 
+    public AgendamentoResponseDTO consultaAgendamento(Long id) {
+        return mapper.paraResponseDTO(repository.findById(id).orElseThrow());
+    }
+
+
 }
