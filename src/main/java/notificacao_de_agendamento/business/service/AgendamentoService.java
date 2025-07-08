@@ -23,5 +23,9 @@ public class AgendamentoService {
         return mapper.paraResponseDTO(repository.findById(id).orElseThrow());
     }
 
+    public void cancelarAgendamento(Long id) {
+        repository.save(mapper.paraEntityCancelamento(
+                repository.findById(id).orElseThrow()));
+    }
 
 }
