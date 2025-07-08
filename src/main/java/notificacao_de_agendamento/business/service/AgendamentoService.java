@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import notificacao_de_agendamento.business.dto.AgendamentoRequestDTO;
 import notificacao_de_agendamento.business.dto.AgendamentoResponseDTO;
 import notificacao_de_agendamento.business.mapper.AgendamentoMapper;
+import notificacao_de_agendamento.business.service.exceptions.ResourceNotFoundException;
 import notificacao_de_agendamento.infrastructure.repositories.AgendamentoRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +21,13 @@ public class AgendamentoService {
     }
 
     public AgendamentoResponseDTO consultaAgendamento(Long id) {
-        return mapper.paraResponseDTO(repository.findById(id).orElseThrow());
+        return mapper.paraResponseDTO(
+                repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id)));
     }
 
     public void cancelarAgendamento(Long id) {
         repository.save(mapper.paraEntityCancelamento(
-                repository.findById(id).orElseThrow()));
+                repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id))));
     }
 
 }
