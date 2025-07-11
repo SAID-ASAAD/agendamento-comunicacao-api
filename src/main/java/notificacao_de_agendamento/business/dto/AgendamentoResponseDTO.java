@@ -10,6 +10,6 @@ public record AgendamentoResponseDTO(Long id,
                                      String telefoneDestinatario,
                                      String mensagem,
                                      @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
-                                     LocalDateTime dataHoraAgendamento,
+                                     LocalDateTime dataHoraEnvio,
                                      StatusNotificacaoEnum statusNotificacao) {
 }
